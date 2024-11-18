@@ -1,4 +1,13 @@
 services:
+  web:
+    container_name: web
+    build: 
+      context: ./web
+    depends_on:
+      - cms
+    ports:
+      - 4321:4321
+
   cms:
     container_name: cms
     build: 
