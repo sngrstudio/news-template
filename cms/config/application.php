@@ -124,6 +124,9 @@ Config::define('DISALLOW_FILE_MODS', true);
 // Limit the number of post revisions
 Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?? true);
 
+// Set default theme to Headless
+Config::define('WP_DEFAULT_THEME', 'headless');
+
 /**
  * Debugging Settings
  */

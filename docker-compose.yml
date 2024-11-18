@@ -1,0 +1,36 @@
+services:
+  cms:
+    container_name: cms
+    build: 
+      context: ./cms
+    depends_on:
+      - db
+    volumes:
+      - cms:/var/www/html/web/app/uploads
+      - ./cms/.env:/var/www/html/.env
+    ports:
+      - 8080:80
+
+  db:
+    container_name: db
+    image: mariadb:10.11.8
+    env_file:
+      - cms/.env
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+    volumes:
+      - db:/var/lib/mysql
+  
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:5.2.1-apache
+    depends_on:
+      - db
+    env_file:
+      - cms/.env
+    ports:
+      - 3380:80
+
+volumes:
+  cms:
+  db:
