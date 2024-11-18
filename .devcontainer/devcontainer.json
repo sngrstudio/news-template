@@ -15,7 +15,21 @@
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [4321, 8080, 3380],
+	"portsAttributes": {
+		"4321": {
+			"label": "Web (Astro)",
+			"onAutoForward": "openBrowser"
+		},
+		"8080": {
+			"label": "CMS (WordPress)",
+			"onAutoForward": "openBrowser"
+		},
+		"3380": {
+			"label": "PHPMyAdmin",
+			"onAutoForward": "notify"
+		}
+	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",

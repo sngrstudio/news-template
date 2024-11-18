@@ -16,7 +16,7 @@ services:
       - db
     volumes:
       - cms:/var/www/html/web/app/uploads
-      - ./cms/.env:/var/www/html/.env
+      - ./cms/.env:/var/www/html/.env:ro
     ports:
       - 8080:80
 
