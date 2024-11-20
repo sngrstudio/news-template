@@ -42,7 +42,10 @@
 				"astro-build.astro-vscode",
 				"DEVSENSE.composer-php-vscode",
 				"GitHub.vscode-github-actions",
-				"bradlc.vscode-tailwindcss"
+				"bradlc.vscode-tailwindcss",
+				"mattpocock.ts-error-translator",
+				"sourcegraph.cody-ai",
+				"GraphQL.vscode-graphql-syntax"
 			]
 		}
 	}

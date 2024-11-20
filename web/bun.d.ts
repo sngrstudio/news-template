@@ -1,6 +1,6 @@
 declare module 'bun' {
-    interface Env {
-        HOST: string | undefined
-        PORT: number | undefined
-    }
+  interface Env {
+    HOST: string | undefined
+    PORT: number | undefined
+  }
 }

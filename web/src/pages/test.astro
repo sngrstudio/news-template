@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content'
+import { Debug } from 'astro:components'
+
+const data = await getCollection('posts')
+
+export const prerender = false
+---
+
+<Debug {data} />

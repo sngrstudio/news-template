@@ -14,5 +14,5 @@ const PORT = process.env.PORT || 4321
 const HOST = process.env.HOST || '0.0.0.0'
 
 app.listen(PORT, HOST, () => {
-    `Server started at ${HOST}:${PORT}`
+  ;`Server started at ${HOST}:${PORT}`
 })
