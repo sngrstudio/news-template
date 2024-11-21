@@ -5,6 +5,8 @@ services:
       context: ./web
     depends_on:
       - cms
+    environment:
+      GRAPHQL_ENDPOINT: http://cms/wp/graphql
     ports:
       - 4321:4321
 

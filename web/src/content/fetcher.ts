@@ -6,7 +6,7 @@ interface GetContentInput {
   variables?: Record<string, any> | undefined
 }
 
-interface GetContentResult<T> {
+export interface GetContentResult<T> {
   data: T
   extensions?: any
 }
