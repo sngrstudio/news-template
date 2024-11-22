@@ -1,4 +1,4 @@
-const GRAPHQL_ENDPOINT = import.meta.env.GRAPHQL_ENDPOINT
+const CONTENT_ENDPOINT = process.env.CONTENT_ENDPOINT as string
 
 export const gql = String.raw
 
@@ -14,7 +14,7 @@ export interface GetContentResult<T> {
 
 const getContent = async ({ query, variables }: GetContentInput) => {
   try {
-    const response = await fetch(GRAPHQL_ENDPOINT, {
+    const response = await fetch(`${CONTENT_ENDPOINT}/wp/graphql`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

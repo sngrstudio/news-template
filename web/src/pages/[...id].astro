@@ -3,8 +3,9 @@ import Layout from '~/layouts/layout.astro'
 import { getPost } from '~/data/posts'
 import { Image } from 'astro:assets'
 
+const CONTENT_ENDPOINT = process.env.CONTENT_ENDPOINT
+
 const post = await getPost({ id: Astro.params.id! })
-console.log(post)
 if (!post) return Astro.redirect('/404')
 
 export const prerender = false
@@ -18,7 +19,12 @@ export const prerender = false
         {
           post.featuredImage && post.featuredImage.node.sourceUrl && (
             <Fragment>
-              <Image src={post.featuredImage.node.sourceUrl} inferSize alt='' />
+              <Image
+                src={`${CONTENT_ENDPOINT}${new URL(post.featuredImage.node.sourceUrl).pathname}`}
+                loading='eager'
+                inferSize
+                alt=''
+              />
               <figcaption set:html={post.featuredImage.node.caption} />
             </Fragment>
           )
@@ -35,5 +41,17 @@ export const prerender = false
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  figure {
+    img {
+      max-width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    figcaption {
+      font-size: small;
+    }
   }
 </style>

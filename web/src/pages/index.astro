@@ -1,36 +1,41 @@
 ---
+import Layout from '~/layouts/layout.astro'
 import { getPosts } from '~/data/posts'
 import { Image } from 'astro:assets'
+
+const CONTENT_ENDPOINT = process.env.CONTENT_ENDPOINT
 
 const posts = await getPosts({ first: 24 })
 
 export const prerender = false
 ---
 
-<main>
-  <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <article>
-            {post.featuredImage && post.featuredImage.node.sourceUrl && (
-              <Image
-                class='_image'
-                src={post.featuredImage.node.sourceUrl}
-                width={120}
-                height={80}
-                alt=''
-              />
-            )}
-            <h2>
-              <a href={post.uri}>{post.title}</a>
-            </h2>
-          </article>
-        </li>
-      ))
-    }
-  </ul>
-</main>
+<Layout>
+  <main>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <article>
+              {post.featuredImage && post.featuredImage.node.sourceUrl && (
+                <Image
+                  class='_image'
+                  src={`${CONTENT_ENDPOINT}${new URL(post.featuredImage.node.sourceUrl).pathname}`}
+                  width={120}
+                  height={80}
+                  alt=''
+                />
+              )}
+              <h2>
+                <a href={post.uri}>{post.title}</a>
+              </h2>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </main></Layout
+>
 
 <style>
   main {

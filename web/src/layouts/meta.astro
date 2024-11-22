@@ -1,13 +1,9 @@
 ---
-export interface Props {
-  title?: string | undefined
-  description?: string | undefined
-}
+import { getSiteInfo, type Site } from '../data/site'
 
-const site = {
-  title: '',
-  description: ''
-} satisfies Required<Props>
+export interface Props extends Partial<Site> {}
+
+const site = await getSiteInfo()
 
 const { title, description } = Astro.props
 ---

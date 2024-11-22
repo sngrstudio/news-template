@@ -10,11 +10,14 @@ const { title, description, class: className, ...props } = Astro.props
 
 <BaseLayout class={className} {...props}>
   {/* <body /> */}
+  <nav>
+    <a href='/'>Home</a>
+  </nav>
   <slot />
 
   {/* <head /> */}
   <Fragment slot='head'>
-    <Meta title={title} description={description} />
+    <Meta title={title} description={description} server:defer />
     <slot name='head' />
   </Fragment>
 </BaseLayout>

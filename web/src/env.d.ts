@@ -1,5 +1,5 @@
 interface ImportMetaEnv {
-  readonly GRAPHQL_ENDPOINT: string
+  readonly CONTENT_ENDPOINT: string
 }
 
 interface ImportMeta {
