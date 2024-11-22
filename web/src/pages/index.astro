@@ -1,16 +1,62 @@
 ---
+import { getPosts } from '~/data/posts'
+import { Image } from 'astro:assets'
 
+const posts = await getPosts({ first: 24 })
+
+export const prerender = false
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<main>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <article>
+            {post.featuredImage && post.featuredImage.node.sourceUrl && (
+              <Image
+                class='_image'
+                src={post.featuredImage.node.sourceUrl}
+                width={120}
+                height={80}
+                alt=''
+              />
+            )}
+            <h2>
+              <a href={post.uri}>{post.title}</a>
+            </h2>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</main>
+
+<style>
+  main {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ul {
+    display: grid;
+    row-gap: 1rem;
+
+    li {
+      list-style: none;
+
+      article {
+        display: flex;
+        column-gap: 0.5rem;
+
+        img {
+          object-fit: cover;
+          object-position: center;
+          width: 120px;
+          height: 80px;
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+import BaseLayout, { type Props as BaseLayoutProps } from './base.astro'
+import Meta, { type Props as MetaProps } from './meta.astro'
+import './style.css'
+
+export interface Props extends MetaProps, BaseLayoutProps {}
+
+const { title, description, class: className, ...props } = Astro.props
+---
+
+<BaseLayout class={className} {...props}>
+  {/* <body /> */}
+  <slot />
+
+  {/* <head /> */}
+  <Fragment slot='head'>
+    <Meta title={title} description={description} />
+    <slot name='head' />
+  </Fragment>
+</BaseLayout>
+
+<style is:global>
+  body {
+    min-height: 100vh;
+  }
+</style>

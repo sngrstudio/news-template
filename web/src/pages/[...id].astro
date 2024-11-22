@@ -1,0 +1,39 @@
+---
+import Layout from '~/layouts/layout.astro'
+import { getPost } from '~/data/posts'
+import { Image } from 'astro:assets'
+
+const post = await getPost({ id: Astro.params.id! })
+console.log(post)
+if (!post) return Astro.redirect('/404')
+
+export const prerender = false
+---
+
+<Layout title={post.title!}>
+  <main>
+    <article>
+      <h1>{post.title}</h1>
+      <figure>
+        {
+          post.featuredImage && post.featuredImage.node.sourceUrl && (
+            <Fragment>
+              <Image src={post.featuredImage.node.sourceUrl} inferSize alt='' />
+              <figcaption set:html={post.featuredImage.node.caption} />
+            </Fragment>
+          )
+        }
+      </figure>
+
+      <Fragment set:html={post.content} />
+    </article>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

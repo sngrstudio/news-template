@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content'
 import { Debug } from 'astro:components'
+import { getPosts } from '~/data/posts'
 
-const data = await getCollection('posts')
+const data = await getPosts()
 
 export const prerender = false
 ---

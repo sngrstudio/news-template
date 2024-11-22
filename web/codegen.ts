@@ -1,10 +1,12 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
+const GRAPHQL_ENDPOINT = import.meta.env.GRAPHQL_ENDPOINT
+
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'http://localhost:8080/wp/graphql',
+  schema: GRAPHQL_ENDPOINT,
   generates: {
-    'src/content/graphql.ts': {
+    'src/data/graphql.ts': {
       plugins: ['typescript']
     }
   }

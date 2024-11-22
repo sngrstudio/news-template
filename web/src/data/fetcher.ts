@@ -1,7 +1,8 @@
 const GRAPHQL_ENDPOINT = import.meta.env.GRAPHQL_ENDPOINT
+
 export const gql = String.raw
 
-interface GetContentInput {
+export interface GetContentInput {
   query: ReturnType<typeof gql>
   variables?: Record<string, any> | undefined
 }
