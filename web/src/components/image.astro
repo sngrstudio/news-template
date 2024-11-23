@@ -1,0 +1,10 @@
+---
+import { Image as AstroImage, type RemoteImageProps } from 'astro:assets'
+
+const SITE_URL = process.env.SITE_URL
+
+type Props = RemoteImageProps
+const { src: originalSrc, ...props } = Astro.props
+---
+
+<AstroImage src={`${SITE_URL}${originalSrc}`} {...props} />

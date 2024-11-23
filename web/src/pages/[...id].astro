@@ -1,9 +1,7 @@
 ---
 import Layout from '~/layouts/layout.astro'
 import { getPost } from '~/data/posts'
-import { Image } from 'astro:assets'
-
-const CONTENT_ENDPOINT = process.env.CONTENT_ENDPOINT
+import Image from '~/components/image.astro'
 
 const post = await getPost({ id: Astro.params.id! })
 if (!post) return Astro.redirect('/404')
@@ -20,7 +18,7 @@ export const prerender = false
           post.featuredImage && post.featuredImage.node.sourceUrl && (
             <Fragment>
               <Image
-                src={`${CONTENT_ENDPOINT}${new URL(post.featuredImage.node.sourceUrl).pathname}`}
+                src={new URL(post.featuredImage.node.sourceUrl).pathname}
                 loading='eager'
                 inferSize
                 alt=''

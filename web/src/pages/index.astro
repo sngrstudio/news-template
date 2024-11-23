@@ -1,9 +1,7 @@
 ---
 import Layout from '~/layouts/layout.astro'
 import { getPosts } from '~/data/posts'
-import { Image } from 'astro:assets'
-
-const CONTENT_ENDPOINT = process.env.CONTENT_ENDPOINT
+import Image from '~/components/image.astro'
 
 const posts = await getPosts({ first: 24 })
 
@@ -20,7 +18,7 @@ export const prerender = false
               {post.featuredImage && post.featuredImage.node.sourceUrl && (
                 <Image
                   class='_image'
-                  src={`${CONTENT_ENDPOINT}${new URL(post.featuredImage.node.sourceUrl).pathname}`}
+                  src={new URL(post.featuredImage.node.sourceUrl).pathname}
                   width={120}
                   height={80}
                   alt=''

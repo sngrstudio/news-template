@@ -5,7 +5,9 @@ services:
       context: ./web
     depends_on:
       - cms
+    init: true
     environment:
+      SITE_URL: http://localhost:4321
       CONTENT_ENDPOINT: http://cms
     ports:
       - 4321:4321
@@ -16,6 +18,7 @@ services:
       context: ./cms
     depends_on:
       - db
+    init: true
     volumes:
       - cms:/var/www/html/web/app/uploads
       - ./cms/.env:/var/www/html/.env:ro
