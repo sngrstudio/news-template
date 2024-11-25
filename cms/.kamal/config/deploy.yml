@@ -16,8 +16,8 @@ servers:
 proxy: 
   ssl: true
   host: content.news-template.sngrtest.my.id
-  # Proxy connects to your container on port 80 by default.
-  # app_port: 3000
+  healthcheck:
+    path: /
 
 # Credentials for your image host.
 registry:
