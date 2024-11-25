@@ -16,8 +16,7 @@ servers:
 proxy: 
   ssl: true
   host: content.news-template.sngrtest.my.id
-  healthcheck:
-    path: /
+  healthcheck: false
 
 # Credentials for your image host.
 registry:
