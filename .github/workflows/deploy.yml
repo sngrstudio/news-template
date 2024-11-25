@@ -79,7 +79,9 @@ jobs:
         env:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}             
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}             
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}             
       - run: ../bin/kamal deploy --config-file=.kamal/config/deploy.yml
         working-directory: ${{ matrix.app }}
         env:
