@@ -11,7 +11,8 @@
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/php:1": {},
 		"ghcr.io/shyim/devcontainers-features/bun:0": {},
-		"ghcr.io/devcontainers-extra/features/composer:1": {}
+		"ghcr.io/devcontainers-extra/features/composer:1": {},
+		"ghcr.io/devcontainers/features/ruby:1": {}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

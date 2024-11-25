@@ -1,0 +1,86 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    env:
+      DOCKER_BUILDKIT: 1
+      BUNDLE_WITHOUT: 'default development test production profiling'
+      BUNDLE_WITH: tools
+      SERVER_ADDR: 103.127.139.54
+    strategy:
+      matrix:
+        app: [cms]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          cache-version: 'tools-v1-${{ runner.os }}'
+      - uses: docker/setup-buildx-action@c47758b77c9736f4b2ef4073d4d51994fabfe349 # v3
+      - uses: crazy-max/ghaction-github-runtime@b3a9207c0e1ef41f4cf215303c976869d0c2c1c4 # v3
+      - run: |
+          mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
+          ssh-keyscan $SERVER_ADDR >> ~/.ssh/known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - if: ${{ matrix.app == 'cms'}}
+        run: |
+          echo "WP_HOME=$WP_HOME" >> .env
+          echo "WP_SITE_URL=$WP_SITE_URL" >> .env
+          echo "DB_NAME=$DB_NAME" >> .env
+          echo "DB_USER=$DB_USER" >> .env
+          echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+          echo "DB_HOST=$DB_HOST" >> .env
+          echo "AUTH_KEY=$AUTH_KEY" >> .env
+          echo "SECURE_AUTH_KEY=$SECURE_AUTH_KEY" >> .env
+          echo "LOGGED_IN_KEY=$LOGGED_IN_KEY" >> .env
+          echo "NONCE_KEY=$NONCE_KEY" >> .env
+          echo "AUTH_SALT=$AUTH_SALT" >> .env
+          echo "SECURE_AUTH_SALT=$SECURE_AUTH_SALT" >> .env
+          echo "LOGGED_IN_SALT=$LOGGED_IN_SALT" >> .env
+          echo "NONCE_SALT=$NONCE_SALT" >> .env
+          scp .env $USER@$SERVER_ADDR:/home/$USER
+        env:
+          USER: sngrstudio
+          WP_HOME: https://content.news-template.sngrtest.my.id
+          WP_SITE_URL: https://content.news-template.sngrtest.my.id/wp
+          DB_NAME: ${{ secrets.MYSQL_DATABASE }}
+          DB_USER: ${{ secrets.MYSQL_USER }}
+          DB_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          DB_HOST: 
+          AUTH_KEY: ${{ secrets.AUTH_KEY }}
+          SECURE_AUTH_KEY: ${{ secrets.SECURE_AUTH_KEY }}
+          LOGGED_IN_KEY: ${{ secrets.LOGGED_IN_KEY }}
+          NONCE_KEY: ${{ secrets.NONCE_KEY }}
+          AUTH_SALT: ${{ secrets.AUTH_SALT }}
+          SECURE_AUTH_SALT: ${{ secrets.SECURE_AUTH_SALT }}
+          LOGGED_IN_SALT: ${{ secrets.LOGGED_IN_SALT }}
+          NONCE_SALT: ${{ secrets.NONCE_SALT }}
+      - run: bin/kamal accessory boot db
+        if: ${{ matrix.app == 'cms'}}
+        env:
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}             
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}             
+      - run: bin/kamal deploy
+        working-directory: ${{ matrix.app }}
+        env:
+          KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
