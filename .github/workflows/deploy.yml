@@ -73,14 +73,14 @@ jobs:
           SECURE_AUTH_SALT: ${{ secrets.SECURE_AUTH_SALT }}
           LOGGED_IN_SALT: ${{ secrets.LOGGED_IN_SALT }}
           NONCE_SALT: ${{ secrets.NONCE_SALT }}
-      - run: bin/kamal accessory boot db --config-file=.kamal/config/deploy.yml
+      - run: ../bin/kamal accessory boot db --config-file=.kamal/config/deploy.yml
         if: ${{ matrix.app == 'cms'}}
         working-directory: ${{ matrix.app }}
         env:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}             
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}             
-      - run: bin/kamal deploy --config-file=.kamal/config/deploy.yml
+      - run: ../bin/kamal deploy --config-file=.kamal/config/deploy.yml
         working-directory: ${{ matrix.app }}
         env:
           KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
