@@ -1,0 +1,31 @@
+// The Dev Container format allows you to configure your environment. At the heart of it
+// is a Docker image or Dockerfile which controls the tools available in your environment.
+//
+// See https://aka.ms/devcontainer.json for more information.
+{
+	"name": "News Template",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",	
+	// Features add additional features to your environment. See https://containers.dev/features
+	// Beware: features are not supported on all platforms and may have unintended side-effects.
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": true,
+			"azureDnsAutoDetection": true,
+			"installDockerBuildx": true,
+			"installDockerComposeSwitch": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "latest"
+		},
+		"ghcr.io/shyim/devcontainers-features/php:0": {
+			"installComposer": true,
+			"version": "8.3"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"DEVSENSE.phptools-vscode"
+			]
+		}
+	}
+}
