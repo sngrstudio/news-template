@@ -1,4 +1,14 @@
 services:
+  content:
+    container_name: content
+    build: content
+    depends_on:
+      - db
+    volumes:
+      - content:/var/www/html/web/app/uploads
+    ports:
+      - 8080:80
+
   db:
     container_name: db
     image: mariadb:10.11.10-jammy
@@ -12,7 +22,7 @@ services:
 
   phpmyadmin:
     container_name: phpmyadmin
-    image: phpmyadmin:5.2.1-apache
+    image: phpmyadmin:5.2.2-apache
     depends_on:
       - db
     environment:
@@ -23,4 +33,5 @@ services:
       - 3380:80
 
 volumes:
+  content:
   db:
