@@ -40,7 +40,8 @@
     "roots/wordpress": "6.7.1",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.2.0",
-    "wpackagist-plugin/wp-graphql": "^1.30"
+    "wpackagist-plugin/wp-graphql": "^1.30",
+    "wpackagist-plugin/wordpress-importer": "^0.8.3"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
