@@ -8,17 +8,9 @@
 	// Features add additional features to your environment. See https://containers.dev/features
 	// Beware: features are not supported on all platforms and may have unintended side-effects.
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
-			"moby": true,
-			"azureDnsAutoDetection": true,
-			"installDockerBuildx": true,
-			"installDockerComposeSwitch": true,
-			"version": "latest",
-			"dockerDashComposeVersion": "latest"
-		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/shyim/devcontainers-features/php:0": {
-			"installComposer": true,
-			"version": "8.3"
+			"installComposer": true
 		}
 	},
 	"customizations": {
