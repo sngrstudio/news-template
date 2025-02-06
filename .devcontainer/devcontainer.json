@@ -10,10 +10,9 @@
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/ruby:1": {},
-		"ghcr.io/shyim/devcontainers-features/php:0": {
-			"installComposer": true
-		},
-		"ghcr.io/shyim/devcontainers-features/bun:0": {}
+		"ghcr.io/shyim/devcontainers-features/php:0": {},
+		"ghcr.io/shyim/devcontainers-features/bun:0": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -23,5 +22,6 @@
 				"Shopify.ruby-extensions-pack"
 			]
 		}
-	}
+	},
+	"runArgs": ["--env-file",".devcontainer/.env"]
 }
