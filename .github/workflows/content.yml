@@ -1,10 +1,29 @@
 name: Deploy Content Service
 
 on:
-#   pull_request:
-#     branches:
-#       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
+    inputs:
+      service:
+        description: 'Choose a service to deploy'
+        required: true
+        type: choice
+        default: content
+        options:
+          - content
+          - db
+          - phpmyadmin
+      action:
+        description: 'Choose an action to perform'
+        required: true
+        type: choice
+        default: boot
+        options:
+          - boot
+          - reboot
+          - shutdown
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -37,6 +56,34 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - uses: crazy-max/ghaction-github-runtime@v3
       - run: |
+          echo "DB_HOST=content-db" > .env
+          echo "DB_NAME=${MYSQL_DATABASE}" >> .env
+          echo "DB_USER=${MYSQL_USER}" >> .env
+          echo "DB_PASSWORD=${MYSQL_PASSWORD}" >> .env
+          echo "WP_ENV=production" >> .env
+          echo "WP_HOME=http://content.103.150.101.64.sslip.io" >> .env
+          echo "WP_HOME=${WP_HOME}/wp" >> .env
+          echo "AUTH_KEY=${AUTH_KEY}" >> .env
+          echo "SECURE_AUTH_KEY=${SECURE_AUTH_KEY}" >> .env
+          echo "LOGGED_IN_KEY=${LOGGED_IN_KEY}" >> .env
+          echo "NONCE_KEY=${NONCE_KEY}" >> .env
+          echo "AUTH_SALT=${AUTH_SALT}" >> .env
+          echo "SECURE_AUTH_SALT=${SECURE_AUTH_SALT}" >> .env
+          echo "LOGGED_IN_SALT=${LOGGED_IN_SALT}" >> .env
+          echo "NONCE_SALT=${NONCE_SALT}" >> .env
+        env:
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          AUTH_KEY: ${{ secrets.AUTH_KEY }}
+          SECURE_AUTH_KEY: ${{ secrets.SECURE_AUTH_KEY }}
+          LOGGED_IN_KEY: ${{ secrets.LOGGED_IN_KEY }}
+          NONCE_KEY: ${{ secrets.NONCE_KEY }}
+          AUTH_SALT: ${{ secrets.AUTH_SALT }}
+          SECURE_AUTH_SALT: ${{ secrets.SECURE_AUTH_SALT }}
+          LOGGED_IN_SALT: ${{ secrets.LOGGED_IN_SALT }}
+          NONCE_SALT: ${{ secrets.NONCE_SALT }}
+      - run: |
           mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
           ssh-keyscan $SERVER_ADDR >> ~/.ssh/known_hosts
@@ -46,3 +93,8 @@ jobs:
         env:
           KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ (github.event.inputs.service == 'content' && github.event.inputs.action == 'boot') || github.event_name == 'pull_request' }}
+      - run: bin/kamal accessory boot db --quiet --config-file=.kamal/config/deploy.yml
+        if: ${{ (github.event.inputs.service == 'db' && github.event.inputs.action == 'boot') }}
+      - run: bin/kamal accessory boot phpmyadmin --quiet --config-file=.kamal/config/deploy.yml
+        if: ${{ (github.event.inputs.service == 'phpmyadmin' && github.event.inputs.action == 'boot') }}
