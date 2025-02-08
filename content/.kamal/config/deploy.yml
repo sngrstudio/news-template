@@ -25,6 +25,8 @@ proxy:
   ssl: true
   host: content.103.150.101.64.sslip.io
   app_port: 80
+  healthcheck:
+    path: /wp-admin/images/wordpress-logo.svg
 
 accessories:
   db:
