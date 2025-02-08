@@ -87,15 +87,15 @@ jobs:
           LOGGED_IN_SALT: ${{ secrets.LOGGED_IN_SALT }}
           NONCE_SALT: ${{ secrets.NONCE_SALT }}
         working-directory: content
-      - run: ../bin/kamal deploy --quiet --config-file=.kamal/config/deploy.yml
+      - run: kamal deploy --quiet --config-file=.kamal/config/deploy.yml
         env:
           KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ (github.event.inputs.service == 'content' && github.event.inputs.action == 'boot') || github.event_name == 'pull_request' }}
         working-directory: content
-      - run: ../bin/kamal accessory boot db --quiet --config-file=.kamal/config/deploy.yml
+      - run: kamal accessory boot db --quiet --config-file=.kamal/config/deploy.yml
         if: ${{ (github.event.inputs.service == 'db' && github.event.inputs.action == 'boot') }}
         working-directory: content
-      - run: ../bin/kamal accessory boot phpmyadmin --quiet --config-file=.kamal/config/deploy.yml
+      - run: kamal accessory boot phpmyadmin --quiet --config-file=.kamal/config/deploy.yml
         if: ${{ (github.event.inputs.service == 'phpmyadmin' && github.event.inputs.action == 'boot') }}
         working-directory: content
