@@ -42,8 +42,9 @@ jobs:
       id-token: write
     env:
       DOCKER_BUILDKIT: 1
-      BUNDLE_WITHOUT: 'default development test production profiling'
-      BUNDLE_WITH: tools
+    defaults:
+      run:
+        working-directory: content
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -52,6 +53,8 @@ jobs:
           cache-version: 'content-builder-${{ runner.os }}'
       - uses: docker/setup-buildx-action@v3
       - uses: crazy-max/ghaction-github-runtime@v3
+      - run: |
+          gem install kamal
       - run: |
           mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
@@ -86,16 +89,12 @@ jobs:
           SECURE_AUTH_SALT: ${{ secrets.SECURE_AUTH_SALT }}
           LOGGED_IN_SALT: ${{ secrets.LOGGED_IN_SALT }}
           NONCE_SALT: ${{ secrets.NONCE_SALT }}
-        working-directory: content
       - run: kamal deploy --quiet --config-file=.kamal/config/deploy.yml
         env:
           KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ (github.event.inputs.service == 'content' && github.event.inputs.action == 'boot') || github.event_name == 'pull_request' }}
-        working-directory: content
       - run: kamal accessory boot db --quiet --config-file=.kamal/config/deploy.yml
         if: ${{ (github.event.inputs.service == 'db' && github.event.inputs.action == 'boot') }}
-        working-directory: content
       - run: kamal accessory boot phpmyadmin --quiet --config-file=.kamal/config/deploy.yml
         if: ${{ (github.event.inputs.service == 'phpmyadmin' && github.event.inputs.action == 'boot') }}
-        working-directory: content
