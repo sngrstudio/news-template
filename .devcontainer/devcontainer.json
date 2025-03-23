@@ -10,19 +10,12 @@
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/shyim/devcontainers-features/php:0": {},
-		"ghcr.io/shyim/devcontainers-features/bun:0": {},
-		"ghcr.io/devcontainers/features/ruby:1": {}
+		"ghcr.io/shyim/devcontainers-features/bun:0": {}
 	},
-	"runArgs": ["--env-file",".devcontainer/.env"],
-	"mounts": [
-    	"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
-	],
-	"postCreateCommand": "gem install kamal",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"DEVSENSE.phptools-vscode",
-				"GitHub.vscode-github-actions"
+				"DEVSENSE.phptools-vscode"
 			]
 		}
 	}
