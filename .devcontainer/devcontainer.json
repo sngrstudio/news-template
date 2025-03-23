@@ -16,7 +16,10 @@
 		"vscode": {
 			"extensions": [
 				"DEVSENSE.phptools-vscode"
-			]
+			],
+			"settings": {
+				"composer.workingPath": "./content"
+			}
 		}
 	}
 }
