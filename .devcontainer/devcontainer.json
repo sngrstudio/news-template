@@ -12,6 +12,7 @@
 		"ghcr.io/shyim/devcontainers-features/php:0": {},
 		"ghcr.io/shyim/devcontainers-features/bun:0": {}
 	},
+	"forwardPorts": [4321, 8080],
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -21,5 +22,8 @@
 				"composer.workingPath": "./content"
 			}
 		}
+	},
+	"containerEnv": {
+		"COMPOSE_BAKE": "1"
 	}
 }
