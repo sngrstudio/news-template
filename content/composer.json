@@ -42,7 +42,7 @@
     "roots/wp-password-bcrypt": "1.2.0",
     "wpackagist-plugin/wp-graphql": "^1.30",
     "wpackagist-plugin/wordpress-importer": "^0.8.3",
-    "wpackagist-plugin/wp-all-import":"3.8.0"
+    "wpackagist-plugin/wp-migrate-db": "^2.7"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",

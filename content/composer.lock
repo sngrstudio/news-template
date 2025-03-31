@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd9e7d3938e010d996992e5ff9483575",
+    "content-hash": "7e2c52bed8d81b763d5d243fbdb53f13",
     "packages": [
         {
             "name": "composer/installers",
@@ -1125,24 +1125,6 @@
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
         },
         {
-            "name": "wpackagist-plugin/wp-all-import",
-            "version": "3.8.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-all-import/",
-                "reference": "tags/3.8.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-all-import.3.8.0.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-all-import/"
-        },
-        {
             "name": "wpackagist-plugin/wp-graphql",
             "version": "1.32.1",
             "source": {
@@ -1159,6 +1141,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-graphql/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-migrate-db",
+            "version": "2.7.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-migrate-db/",
+                "reference": "tags/2.7.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-migrate-db.2.7.2.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-migrate-db/"
         }
     ],
     "packages-dev": [
