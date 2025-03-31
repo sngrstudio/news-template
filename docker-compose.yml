@@ -12,13 +12,13 @@ services:
   db:
     container_name: db
     image: mariadb:10.11.10-jammy
+    volumes:
+      - db:/var/lib/mysql
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=1
       - MYSQL_DATABASE=db
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
-    volumes:
-      - db:/var/lib/mysql
 
   phpmyadmin:
     container_name: phpmyadmin
