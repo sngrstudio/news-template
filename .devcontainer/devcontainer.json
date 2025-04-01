@@ -3,27 +3,33 @@
 //
 // See https://aka.ms/devcontainer.json for more information.
 {
-	"name": "News Template",
-	"image": "mcr.microsoft.com/devcontainers/base:debian",	
-	// Features add additional features to your environment. See https://containers.dev/features
-	// Beware: features are not supported on all platforms and may have unintended side-effects.
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		"ghcr.io/shyim/devcontainers-features/php:0": {},
-		"ghcr.io/shyim/devcontainers-features/bun:0": {}
-	},
-	"forwardPorts": [4321, 8080],
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"DEVSENSE.phptools-vscode"
-			],
-			"settings": {
-				"composer.workingPath": "./content"
-			}
-		}
-	},
-	"containerEnv": {
-		"COMPOSE_BAKE": "1"
-	}
+  "name": "News Template",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  // Features add additional features to your environment. See https://containers.dev/features
+  // Beware: features are not supported on all platforms and may have unintended side-effects.
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/shyim/devcontainers-features/php:0": {},
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
+  "forwardPorts": [4321, 8080],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "DEVSENSE.phptools-vscode",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "prettier.prettierPath": "/home/vscode/.bun/install/global/node_modules/prettier",
+        "composer.workingPath": "./content"
+      }
+    }
+  },
+  "containerEnv": {
+    "COMPOSE_BAKE": "1"
+  },
+  "postCreateCommand": "bun install --global prettier"
 }
