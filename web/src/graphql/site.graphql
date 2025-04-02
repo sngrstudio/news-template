@@ -1,0 +1,11 @@
+query GetSiteInfo($logoId: ID = "logo") {
+  generalSettings {
+    title
+    description
+  }
+  mediaItem(id: $logoId, idType: SLUG) {
+    sourceUrl
+    slug
+    altText
+  }
+}

@@ -18,7 +18,10 @@
       "extensions": [
         "DEVSENSE.phptools-vscode",
         "esbenp.prettier-vscode",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "astro-build.astro-vscode",
+        "GraphQL.vscode-graphql",
+        "christian-kohler.npm-intellisense"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
