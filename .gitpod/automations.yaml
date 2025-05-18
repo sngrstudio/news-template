@@ -1,0 +1,27 @@
+services:
+    db:
+        name: Database Service
+        description: Run MariaDB Database
+        commands:
+            start: |
+                docker run --rm --name db -v db_data:/var/lib/mysql -p 3306:3306 -e MYSQL_USER=user -e MYSQL_PASSWORD=secret -e MYSQL_DATABASE=db -e MYSQL_RANDOM_ROOT_PASSWORD=1 mariadb:10.11.10-jammy
+        triggeredBy:
+            - postEnvironmentStart
+
+    phpmyadmin:
+        name: PHPMyAdmin
+        description: Run PHPMyAdmin
+        commands:
+            start: |
+                docker run --rm --name phpmyadmin -p 4323:80 -e PMA_USER=user -e PMA_PASSWORD=secret -e PMA_HOST=127.0.0.1 -e PMA_PORT=3306 phpmyadmin:5.2.2-apache
+        triggeredBy:
+            - postEnvironmentStart
+
+    content:
+        name: Content Service
+        description: Run WordPress-based content service
+        commands:
+            start: |
+                php -S 0.0.0.0:4322 -t ./content/web
+        triggeredBy:
+            - postEnvironmentStart
