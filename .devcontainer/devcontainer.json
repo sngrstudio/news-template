@@ -4,27 +4,45 @@
 	"name": "news-template",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	// "image": "mcr.microsoft.com/devcontainers/base:bookworm",
-	"build": {
-		"dockerfile": "php.Dockerfile"
-	},
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "workspace",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		"ghcr.io/shyim/devcontainers-features/bun:0": {}
-	},
+	// "features": {
+	// 	"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+	// 	"ghcr.io/shyim/devcontainers-features/bun:0": {}
+	// },
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [4322],
+	"forwardPorts": [4322, 3306],
 
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"DEVSENSE.phptools-vscode"
+				"DEVSENSE.phptools-vscode",
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-mysql"
 			],
 			"settings": {
-				"composer.workingPath": "./content"
+				"composer.workingPath": "./content",
+				"sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "workspace",
+            "database": "workspace",
+            "username": "workspace",
+            "password": "workspace"
+        }
+    ]
 			}
 		}
 	}

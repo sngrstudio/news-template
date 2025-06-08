@@ -1,0 +1,27 @@
+services:
+  workspace:
+    container_name: workspace
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: service:db
+    volumes:
+      - ../..:/workspaces:cached
+    command: ["sleep", "infinity"]
+
+  db:
+    container_name: db
+    image: mariadb:10.11.10-jammy
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_USER: workspace
+      MYSQL_PASSWORD: workspace
+      MYSQL_DATABASE: workspace
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+
+volumes:
+  db_data:
