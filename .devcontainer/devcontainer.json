@@ -9,10 +9,10 @@
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {
-	// 	"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-	// 	"ghcr.io/shyim/devcontainers-features/bun:0": {}
-	// },
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		// "ghcr.io/shyim/devcontainers-features/bun:0": {}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [4322, 4323],

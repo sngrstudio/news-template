@@ -6,4 +6,4 @@ services:
             start: |
                 php -S 0.0.0.0:4322 -t ./content/web
         triggeredBy:
-            - postEnvironmentStart
+            - manual

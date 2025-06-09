@@ -40,7 +40,8 @@
     "roots/wordpress": "6.8.1",
     "roots/wp-config": "1.0.0",
     "wpackagist-plugin/wp-graphql": "^2.3",
-    "wpackagist-plugin/wpgraphql-smart-cache": "^2.0"
+    "wpackagist-plugin/wpgraphql-smart-cache": "^2.0",
+    "wpackagist-plugin/wordpress-importer": "^0.8.4"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
