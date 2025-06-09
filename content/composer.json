@@ -38,7 +38,9 @@
     "roots/bedrock-autoloader": "^1.0",
     "roots/bedrock-disallow-indexing": "^2.0",
     "roots/wordpress": "6.8.1",
-    "roots/wp-config": "1.0.0"
+    "roots/wp-config": "1.0.0",
+    "wpackagist-plugin/wp-graphql": "^2.3",
+    "wpackagist-plugin/wpgraphql-smart-cache": "^2.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",

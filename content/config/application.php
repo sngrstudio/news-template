@@ -134,6 +134,9 @@ Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?? true);
 // Disable script concatenation
 Config::define('CONCATENATE_SCRIPTS', false);
 
+// Set default theme to Headless
+Config::define('WP_DEFAULT_THEME', 'headless');
+
 /**
  * Debugging Settings
  */
