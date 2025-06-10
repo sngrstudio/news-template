@@ -13,6 +13,6 @@ services:
         description: Run WordPress-based content service using Dockerfile
         commands:
             start: |
-                docker build -t content content/ && docker run --rm --name content --network host -v content-uploads:/var/www/html/web/app/uploads content
+                docker build --build-arg CLI=true -t content content/ && docker run --rm --name content --network host -v content-uploads:/var/www/html/web/app/uploads content
         triggeredBy:
             - manual
