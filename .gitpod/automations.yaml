@@ -1,9 +1,18 @@
 services:
-    content:
-        name: Content Service
-        description: Run WordPress-based content service
+    content-dev:
+        name: Content Service (Dev)
+        description: Run WordPress-based content service using PHP built-in server
         commands:
             start: |
                 php -S 0.0.0.0:4322 -t ./content/web
+        triggeredBy:
+            - manual
+
+    content-preview:
+        name: Content Service (Preview)
+        description: Run WordPress-based content service using Dockerfile
+        commands:
+            start: |
+                docker build -t content content/ && docker run --rm --name content --network host -v content-uploads:/var/www/html/web/app/uploads content
         triggeredBy:
             - manual
