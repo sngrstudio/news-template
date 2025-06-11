@@ -1,37 +1,37 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/debian
 {
-	"name": "news-template",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "mcr.microsoft.com/devcontainers/base:bookworm",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "workspace",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		// "ghcr.io/shyim/devcontainers-features/bun:0": {}
-	},
+  "name": "news-template",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  // "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "workspace",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [4322, 4323],
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
 
-	// Configure tool-specific properties.
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"DEVSENSE.phptools-vscode",
-				"mtxr.sqltools",
-				"mtxr.sqltools-driver-mysql"
-			],
-			"settings": {
-				"composer.workingPath": "./content",
-				"sqltools.connections": [
-        {
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [4322, 4323],
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "DEVSENSE.phptools-vscode",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql"
+      ],
+      "settings": {
+        "composer.workingPath": "./content",
+        "sqltools.connections": [
+          {
             "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
+              "authProtocol": "default",
+              "enableSsl": "Disabled"
             },
             "previewLimit": 50,
             "server": "localhost",
@@ -41,12 +41,12 @@
             "database": "workspace",
             "username": "workspace",
             "password": "workspace"
-        }
-    ]
-			}
-		}
-	}
+          }
+        ]
+      }
+    }
+  }
 
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
 }
