@@ -27,7 +27,8 @@
         "astro-build.astro-vscode",
         "esbenp.prettier-vscode",
         "GitHub.vscode-github-actions",
-        "christian-kohler.npm-intellisense"
+        "christian-kohler.npm-intellisense",
+        "GraphQL.vscode-graphql"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
