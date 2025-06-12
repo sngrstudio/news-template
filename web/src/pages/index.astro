@@ -1,12 +1,10 @@
 ---
 import Layout from '~/layouts/layout.astro'
-import { Debug } from 'astro:components'
-import { getSettings } from '~/graphql/settings'
+import { getEntry } from 'astro:content'
 
-const settings = await getSettings()
+const site = await getEntry('site', 'SITE')
 ---
 
 <Layout>
   <h1>Hello World!</h1>
-  <Debug {settings} />
 </Layout>

@@ -1,4 +1,5 @@
 ---
+import { getEntry } from 'astro:content'
 export interface Props {
   title?: string | undefined
   description?: string | undefined
@@ -7,18 +8,16 @@ export interface Props {
 
 const { title, description, canonical } = Astro.props
 
-const site = {
-  title: 'Astro Base Template',
-  description:
-    'Astro Base Template is for used as base template for another template or be used directly'
-} satisfies Props
+const site = await getEntry('site', 'SITE')
 ---
 
 {/* Basic metadata */}
-<title>{title ? `${title} \u2014 ${site.title}` : site.title}</title>
+<title>
+  {title ? `${title} \u2014 ${site?.data.title}` : site?.data.title}
+</title>
 <meta
   name='description'
-  content={description ? description : site.description}
+  content={description ? description : site?.data.description}
 />
 <link rel='canonical' href={canonical ? canonical : Astro.url} />
 
