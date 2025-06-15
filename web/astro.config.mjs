@@ -3,7 +3,11 @@ import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
-  redirects: {
-    '/sngrcreative': 'https://sngrcreative.pages.dev'
+  image: {
+    domains: ['localhost:4321', 'localhost:4322'],
+    experimentalLayout: 'constrained'
+  },
+  experimental: {
+    responsiveImages: true
   }
 })

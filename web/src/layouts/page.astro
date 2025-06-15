@@ -1,0 +1,39 @@
+---
+import Layout, { type Props as LProps } from './layout.astro'
+import { Picture } from 'astro:assets'
+
+interface Props extends LProps {
+  title: string
+  featuredImage?: string | undefined
+}
+
+const { title, featuredImage, ...props } = Astro.props
+---
+
+<Layout title={title} {...props}>
+  {/* <body> */}
+  <main>
+    <article>
+      <hgroup>
+        <h1>{title}</h1>
+        {
+          featuredImage && (
+            <Picture
+              src={featuredImage}
+              alt=''
+              priority={true}
+              inferSize={true}
+            />
+          )
+        }
+      </hgroup>
+
+      <slot />
+    </article>
+  </main>
+
+  {/* <head> */}
+  <Fragment slot='head'>
+    <slot name='head' />
+  </Fragment>
+</Layout>
