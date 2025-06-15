@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content'
-import { getSite } from './content.graphql'
+import { getSite } from '../graphql/site'
 import { z } from 'astro:schema'
 
 const site = defineCollection({

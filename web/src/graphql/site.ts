@@ -1,12 +1,7 @@
 import type { RootQuery } from '~/graphql/graphql'
-import execute, { gql, type RemoveNull } from '~/graphql/execute'
+import execute, { gql } from '~/graphql/execute'
 
-type SiteRQ = RemoveNull<Pick<RootQuery, 'generalSettings'>>
-type Site = Omit<SiteRQ, 'generalSettings'> & {
-  generalSettings: RemoveNull<
-    Pick<SiteRQ['generalSettings'], 'title' | 'description'>
-  >
-}
+type Site = Pick<RootQuery, 'generalSettings'>
 
 const getSiteQuery = gql`
   query GetSite {

@@ -137,6 +137,9 @@ Config::define('CONCATENATE_SCRIPTS', false);
 // Set default theme to Headless
 Config::define('WP_DEFAULT_THEME', 'headless');
 
+// WPGraphQL Debugging Settings
+Config::define('GRAPHQL_DEBUG', env('GRAPHQL_DEBUG') ?? false);
+
 /**
  * Debugging Settings
  */

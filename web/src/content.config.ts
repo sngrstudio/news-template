@@ -1,3 +1,4 @@
-import site from '~/content/site/content.config'
+import site from '~/content/site'
+import pages from '~/content/pages'
 
-export const collections = { site }
+export const collections = { site, pages }
