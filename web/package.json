@@ -7,13 +7,14 @@
     "build": "conc bun:check:* && astro build",
     "check:astro": "astro check",
     "check:style": "prettier --check .",
-    "dev": "astro dev",
+    "dev": "astro dev --host=0.0.0.0",
     "format": "prettier --write .",
-    "preview": "astro preview",
-    "gql:generate": "graphql-codegen --config codegen.ts"
+    "gql:generate": "graphql-codegen --config codegen.ts",
+    "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "5.8.1"
+    "@astrojs/node": "^9.2.2",
+    "astro": "5.10.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",

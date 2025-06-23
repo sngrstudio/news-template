@@ -1,13 +1,20 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
 
+import node from '@astrojs/node'
+
 // https://astro.build/config
 export default defineConfig({
   image: {
     domains: ['localhost:4321', 'localhost:4322'],
-    experimentalLayout: 'constrained'
+    layout: 'constrained'
   },
+
   experimental: {
-    responsiveImages: true
-  }
+    liveContentCollections: true
+  },
+
+  adapter: node({
+    mode: 'standalone'
+  })
 })
