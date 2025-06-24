@@ -1,12 +1,8 @@
 ---
 import Layout from '~/layouts/layout.astro'
-import { getLiveCollection } from 'astro:content'
-import { Debug } from 'astro:components'
-
-const posts = await getLiveCollection('posts', {})
+import Posts from '~/components/posts.astro'
 ---
 
 <Layout>
-  <h1>Hello World!</h1>
-  <Debug {posts} server:defer />
+  <Posts server:defer />
 </Layout>
