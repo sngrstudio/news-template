@@ -1,0 +1,30 @@
+{
+  "name": "web",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "conc bun:check:* && astro build",
+    "check:astro": "astro check",
+    "check:style": "prettier --check .",
+    "dev": "astro dev --host=0.0.0.0",
+    "format": "prettier --write .",
+    "gql:generate": "graphql-codegen --config codegen.ts",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.2.2",
+    "astro": "5.10.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.4",
+    "@graphql-codegen/cli": "5.0.7",
+    "@graphql-codegen/typescript": "4.1.6",
+    "@types/bun": "^1.2.15",
+    "concurrently": "9.1.2",
+    "prettier": "3.5.3",
+    "prettier-config-standard": "7.0.0",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "5.8.3"
+  }
+}

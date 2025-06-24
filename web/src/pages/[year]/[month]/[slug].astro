@@ -1,0 +1,19 @@
+---
+import Layout from '~/layouts/page.astro'
+import { getLiveEntry, render } from 'astro:content'
+
+export const prerender = false
+
+const { year, month, slug } = Astro.params
+const { entry: post } = await getLiveEntry('posts', `/${year}/${month}/${slug}`)
+if (!post) {
+  return Astro.rewrite('/404')
+}
+
+// @ts-ignore
+const { Content } = await render(post)
+---
+
+<Layout title={post.data.title || ''} featuredImage={post.data.featuredImage}>
+  <Content />
+</Layout>

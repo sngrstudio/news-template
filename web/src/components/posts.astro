@@ -1,0 +1,34 @@
+---
+import { getLiveCollection } from 'astro:content'
+import { Picture } from 'astro:assets'
+
+const posts = await getLiveCollection('posts', {})
+---
+
+<section>
+  {
+    posts.entries &&
+      posts.entries.map((post) => (
+        <article>
+          {post.data.featuredImage && (
+            <div>
+              <a href={post.data.uri}>
+                <Picture
+                  src={post.data.featuredImage}
+                  width={200}
+                  height={150}
+                  alt=''
+                />
+              </a>
+            </div>
+          )}
+          <div>
+            <h2>
+              <a href={post.data.uri}>{post.data.title}</a>
+            </h2>
+            <Fragment set:html={post.data.excerpt} />
+          </div>
+        </article>
+      ))
+  }
+</section>
