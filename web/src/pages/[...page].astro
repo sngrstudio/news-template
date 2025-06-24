@@ -1,6 +1,6 @@
 ---
 import Layout from '~/layouts/page.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 
 export const getStaticPaths = async () => {
   const pages = await getCollection('pages')
@@ -15,8 +15,9 @@ export const getStaticPaths = async () => {
 }
 
 const { page } = Astro.props
+const { Content } = await render(page)
 ---
 
 <Layout title={page.data.title || ''} featuredImage={page.data.featuredImage}>
-  <Fragment set:html={page.data.content} />
+  <Content />
 </Layout>
